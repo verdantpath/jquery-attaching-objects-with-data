@@ -1,0 +1,43 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>JQuery Attaching Objects With .data</title>
+
+</head>
+<body>
+<a id="myId">Get a quote</a>
+<span id="myLabel">This sends a quote request</span>
+
+<div id="time" class="updateTime"></div>
+
+<script type="text/JavaScript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+
+<script type="text/Javascript">
+// var node = document.getElementById('myId');
+// node.onclick = function() {
+//   console.log('Get a quote button has been clicked');
+// };
+// node.myObject = {
+//   label: document.getElementById('myLabel')
+// };
+
+$('#myId').data('myObject', {
+  label: $('#myLabel')[0]
+});
+var myObject = $('#myId').data('myObject');
+myObject.label;
+
+$(document).bind('setData', function(evt, key, value) {
+  if ( key == 'clock' ) {
+    $('.updateTime').html( value );
+  }
+});
+
+setInterval(function() {
+  $(document).data('clock', (new Date()).toString() );
+}, 1000);
+
+</script>
+</body>
+</html>
